@@ -38,6 +38,7 @@ export default function SideMenu() {
                 width: 25px;
                 align-items: center;
                 justify-content: center;
+                position: fixed;
             }
 
             .sideMenuDiv1 {

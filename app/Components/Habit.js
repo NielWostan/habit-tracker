@@ -13,37 +13,37 @@ export default function Habit(props) {
           {
             id: 1,
             date: "10/12",
-            isChecked: true
+            isChecked: false
           },
           {
             id: 2,
             date: "10/13",
-            isChecked: true
+            isChecked: false
           },
           {
             id: 3,
             date: "10/14",
-            isChecked: true
+            isChecked: false
           },
           {
             id: 4,
             date: "10/15",
-            isChecked: true
+            isChecked: false
           },
           {
             id: 5,
             date: "10/16",
-            isChecked: true
+            isChecked: false
           },
           {
             id: 6,
             date: "10/17",
-            isChecked: true
+            isChecked: false
           },
           {
             id: 7,
             date: "10/18",
-            isChecked: true
+            isChecked: false
           }
         ]
       )
@@ -89,6 +89,7 @@ export default function Habit(props) {
                     display: flex;
                     border: 1px solid green;
                     justify-content: space-between;
+                    height: 25px;
                 }
 
                 .habitName {
