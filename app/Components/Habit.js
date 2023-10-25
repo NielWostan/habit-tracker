@@ -57,19 +57,19 @@ export default function Habit(props) {
     )
 
     function toggleChange(id,isChecked) {
-        setData(prevValue => 
-            {
-                let newValue = prevValue
-                for (let i = 0; i < newValue.length; i++) {
-                    if (newValue[i].id == id) {
-                        newValue[i].isChecked = !isChecked 
-                        break
-                    } else {
-                        continue
-                    }
-                }
-                return newValue
+      setData(prevValue =>
+        {
+          let newValue = prevValue
+          for (let i = 0; i < newValue.length; i++) {
+            if (newValue[i].id == id) {
+              newValue[i].isChecked = !isChecked 
+              break
+            } else {
+              continue
             }
+          } 
+          return newValue
+          }
         )
         router.refresh()
     }
@@ -77,12 +77,11 @@ export default function Habit(props) {
   return (
     <div className="habit">
         <div className="habitName">
-            <p>{props.title}</p>
+          <p>{props.title}</p>
         </div>
         <div className="habitList">
-            {dataElements}
+          {dataElements}
         </div>
-
         <style jsx>
             {`
                 .habit {

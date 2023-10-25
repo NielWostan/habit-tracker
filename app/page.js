@@ -1,12 +1,20 @@
 import Styles from "./page.module.css"
 
+import { use } from "react"
 import HabitsList from "./Components/HabitsList";
+import { getHabits } from "@/library/getHabits";
+import { getUsers } from "@/library/getUsers";
 
 export default function Home() {
+
+  const currentUserId = 1 // Get this from auth at some point
+  const habits = use(getHabits(currentUserId))
+  const user = use(getUsers(currentUserId))
+  
   return (
     <main className={Styles.main}>
-      <p className={Styles.pageHeading}>Home page</p>
-      <HabitsList/>
+      <p className={Styles.pageHeading}>Home page for {user.Name}</p>
+      <HabitsList data = {habits} currentUserId = {currentUserId}/>
     </main>
   )
 }

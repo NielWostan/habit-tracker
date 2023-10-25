@@ -1,11 +1,13 @@
 'use client'
 
+import { use } from "react"
 import { useState } from "react";
 import Habit from "./Habit";
 import AddHabit from "./AddHabit";
+import { pushHabit } from "@/library/pushHabit";
 
-export default function HabitsList() {
-    const [data,setData] = useState(
+export default function HabitsList(props) {
+    /*const [data,setData] = useState(
         [
             {
                 id: 0,
@@ -24,18 +26,22 @@ export default function HabitsList() {
                 name: "Reading"
             }
         ]
-    )
+    )*/
 
-    function triggerAddNewHabit(newHabitName) {
-        setData(prevValue => [...prevValue,{id: prevValue.length, name: newHabitName}])
+
+    const [data,setData] = useState(props.data)
+
+    async function triggerAddNewHabit(newHabitName) {
+        console.log(props.currentUserId,newHabitName)
+        // Need to fix here
     }
     
-    const dataElements = data.map(dataEl => <Habit title = {dataEl.name} key = {dataEl.id}/>)
+    const dataElements = data.map(dataEl => <Habit title = {dataEl.title} key = {dataEl.id}/>)
 
     return (
         <div className='habitsList'>
             {dataElements}
-            <AddHabit triggerAddNewHabit={triggerAddNewHabit}/>
+            <AddHabit triggerAddNewHabit={triggerAddNewHabit} currentUserId = {props.currentUserId}/>
             <style jsx>
                 {`
                     .habitsList {
