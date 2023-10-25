@@ -5,6 +5,7 @@ import { useState } from "react";
 import Habit from "./Habit";
 import AddHabit from "./AddHabit";
 import { pushHabit } from "@/library/pushHabit";
+import { POST } from "../api/route";
 
 export default function HabitsList(props) {
     /*const [data,setData] = useState(
@@ -32,8 +33,9 @@ export default function HabitsList(props) {
     const [data,setData] = useState(props.data)
 
     async function triggerAddNewHabit(newHabitName) {
-        console.log(props.currentUserId,newHabitName)
+        POST(props.currentUserId,newHabitName)
         // Need to fix here
+        // Find a way to PUSH data into the database
     }
     
     const dataElements = data.map(dataEl => <Habit title = {dataEl.title} key = {dataEl.id}/>)
