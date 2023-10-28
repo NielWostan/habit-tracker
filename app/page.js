@@ -1,9 +1,9 @@
 import Styles from "./page.module.css"
 
 import { use } from "react"
-import HabitsList from "./Components/HabitsList";
 import { getHabits } from "@/library/getHabits";
 import { getUsers } from "@/library/getUsers";
+import HabitsList from "./Components/HabitsList";
 
 export default function Home() {
 

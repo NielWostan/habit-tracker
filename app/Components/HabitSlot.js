@@ -3,12 +3,12 @@
 export default function HabitSlot(props) {
 
     function toggleChange() {
-        props.toggleChange(props.id, props.isChecked)
+        props.toggleChange(`day${props.id}`, props.isChecked)
     }
 
   return (
     <>
-        <div className="habitSlot" onClick={() => toggleChange(props.id, props.isChecked)}></div>
+        <div className="habitSlot" onClick={() => toggleChange(`day${props.id}`, props.isChecked)}></div>
         <style jsx>
             {`
                 .habitSlot {

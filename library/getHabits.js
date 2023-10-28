@@ -8,5 +8,6 @@ export async function getHabits(currentUserId) {
         returnData.push(data[i])
       }
     }
+    returnData.sort((a,b) => a.id - b.id)
     return returnData
   }

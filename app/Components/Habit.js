@@ -2,108 +2,58 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
 import HabitSlot from "./HabitSlot";
 
 export default function Habit(props) {
 
-    const router = useRouter()
+  const [data,setData] = useState(props.data)
+  const [habitId,setProjectId] = useState(props.data.id)
 
-    const [data,setData] = useState(
-        [
-          {
-            id: 1,
-            date: "10/12",
-            isChecked: false
-          },
-          {
-            id: 2,
-            date: "10/13",
-            isChecked: false
-          },
-          {
-            id: 3,
-            date: "10/14",
-            isChecked: false
-          },
-          {
-            id: 4,
-            date: "10/15",
-            isChecked: false
-          },
-          {
-            id: 5,
-            date: "10/16",
-            isChecked: false
-          },
-          {
-            id: 6,
-            date: "10/17",
-            isChecked: false
-          },
-          {
-            id: 7,
-            date: "10/18",
-            isChecked: false
-          }
-        ]
-      )
-
-    const dataElements = data.map(dataEl => 
-        <HabitSlot 
-            isChecked={dataEl.isChecked} 
-            toggleChange={toggleChange} 
-            key={dataEl.id} 
-            id={dataEl.id}/>
-    )
-
-    function toggleChange(id,isChecked) {
-      setData(prevValue =>
-        {
-          let newValue = prevValue
-          for (let i = 0; i < newValue.length; i++) {
-            if (newValue[i].id == id) {
-              newValue[i].isChecked = !isChecked 
-              break
-            } else {
-              continue
-            }
-          } 
-          return newValue
-          }
-        )
-        router.refresh()
-    }
+  const router = useRouter()
+  async function toggleChange(habitSlotId,isChecked) {
+    isChecked = !isChecked
+    await fetch('../api/updateProgress', {
+      method: 'PUT',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({habitId,habitSlotId,isChecked})
+    })
+    router.refresh()
+  }
 
   return (
     <div className="habit">
-        <div className="habitName">
-          <p>{props.title}</p>
-        </div>
-        <div className="habitList">
-          {dataElements}
-        </div>
-        <style jsx>
-            {`
-                .habit {
-                    display: flex;
-                    border: 1px solid green;
-                    justify-content: space-between;
-                    height: 25px;
-                }
-
-                .habitName {
-                    width: 25%;
-                }
-
-                .habitList {
-                    display: flex;
-                    border: 1px solid pink;
-                    width: 75%;
-                    justify-content: space-around;
-                }
-                
-            `}
-        </style>
+      <div className="habitName">
+        <p>{props.data.title}</p>
+      </div>
+      <div className="habitList">
+        <HabitSlot id = {1} isChecked = {data.day1} toggleChange={toggleChange} />
+        <HabitSlot id = {2} isChecked = {data.day2} toggleChange={toggleChange} />
+        <HabitSlot id = {3} isChecked = {data.day3} toggleChange={toggleChange} />
+        <HabitSlot id = {4} isChecked = {data.day4} toggleChange={toggleChange} />
+        <HabitSlot id = {5} isChecked = {data.day5} toggleChange={toggleChange} />
+        <HabitSlot id = {6} isChecked = {data.day6} toggleChange={toggleChange} />
+        <HabitSlot id = {7} isChecked = {data.day7} toggleChange={toggleChange} />
+      </div>
+      <style jsx>
+        {`
+          .habit {
+            display: flex;
+            border: 1px solid green;
+            justify-content: space-between;
+            height: 25px;
+          }
+         .habitName {
+            width: 25%;
+          }
+          .habitList {
+            display: flex;
+            border: 1px solid pink;
+            width: 75%;
+            justify-content: space-around;
+          }
+        `}
+      </style>
     </div>
   )
 }

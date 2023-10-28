@@ -1,44 +1,28 @@
 'use client'
 
-import { use } from "react"
 import { useState } from "react";
 import Habit from "./Habit";
 import AddHabit from "./AddHabit";
-import { pushHabit } from "@/library/pushHabit";
-import { POST } from "../api/route";
 
 export default function HabitsList(props) {
-    /*const [data,setData] = useState(
-        [
-            {
-                id: 0,
-                name: "Meditation"
-            },
-            {
-                id: 1,
-                name: "Exercise"
-            },
-            {
-                id: 2,
-                name: "Cardio"
-            },
-            {
-                id: 3,
-                name: "Reading"
-            }
-        ]
-    )*/
-
 
     const [data,setData] = useState(props.data)
+    const [projectId,setProjectId] = useState(props.currentUserId)
 
     async function triggerAddNewHabit(newHabitName) {
-        POST(props.currentUserId,newHabitName)
-        // Need to fix here
-        // Find a way to PUSH data into the database
+        await fetch('../api/addHabit', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({newHabitName,projectId})
+        })
     }
     
-    const dataElements = data.map(dataEl => <Habit title = {dataEl.title} key = {dataEl.id}/>)
+    const dataElements = data.map(dataEl => 
+        <Habit 
+            data = {dataEl}
+            key = {dataEl.id}
+        />
+    )
 
     return (
         <div className='habitsList'>
