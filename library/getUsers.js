@@ -10,4 +10,4 @@ export async function getUsers(currentUserId) {
       }
     }
     return user
-  }
+}

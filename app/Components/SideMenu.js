@@ -15,6 +15,7 @@ export default function SideMenu() {
         <Link href = "/" onClick={toggleSideMenu}>Home</Link>
         <Link href = "/profile" onClick={toggleSideMenu}>Profile</Link>
         <Link href = "/global" onClick={toggleSideMenu}>Global</Link>
+        <Link href = "/login" onClick={toggleSideMenu}>Logout</Link>
         {/* Setting page */}
     </div>
     <style jsx>

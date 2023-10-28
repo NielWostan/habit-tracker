@@ -13,7 +13,7 @@ export default function Home() {
   
   return (
     <main className={Styles.main}>
-      <p className={Styles.pageHeading}>Home page for {user.Name}</p>
+      <p className={Styles.pageHeading}>Home page for {user.name}</p>
       <HabitsList data = {habits} currentUserId = {currentUserId}/>
     </main>
   )
