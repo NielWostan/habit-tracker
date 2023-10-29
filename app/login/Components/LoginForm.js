@@ -1,51 +1,35 @@
 'use client'
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/navigation"
+import Link from "next/link"
 import Styles from "../page.module.css"
 
-export default function LoginForm(props) {
+export default function SignupForm(props) {
 
-    const [currentUserId,setCurrentUserId] = useState("")
-    const router = useRouter()
-
-    function handleSubmit() {
-        if (isUserFound() === true) {
-            router.replace('/')
-        } else {
-            window.alert("Invalid user id")
-        }
-        setCurrentUserId("")
-    }
-
-    function isUserFound() {
-        let found = false
-        for (let i = 0; i < props.data.length; i++) {
-            if (props.data[i] == currentUserId) {
-                found = true
-                break
-            } else {
-                continue
-            }
-        }
-        return found
-    } 
+    const [email,setEmail] = useState("")
+    const [password,setPassword] = useState("")
 
     return (
         <>
             <div className={Styles.heading}>Login</div>
             <div className={Styles.formDiv}>
                 <input 
-                    className={Styles.userId} 
-                    placeholder="Enter your User ID..."
-                    value = {currentUserId}
-                    onChange={(event) => setCurrentUserId(event.target.value)}
+                    className={Styles.email} 
+                    placeholder="Enter your email..."
+                    value = {email}
+                    onChange={(event) => setEmail(event.target.value)}
                 />
-                <button className={Styles.submitBtn} onClick={() => handleSubmit(currentUserId)}>Submit</button>
+                <input 
+                    className={Styles.password} 
+                    placeholder="Enter your password..."
+                    value = {password}
+                    type="password"
+                    onChange={(event) => setPassword(event.target.value)}
+                />
+                <button className={Styles.submitBtn} onClick={() => console.log(email,password)}>Submit</button>
             </div>
             <div>
-                <Link href="/signup"></Link>
+                <Link href="/signup">Signup</Link>
             </div>
         </>
     )
