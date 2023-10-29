@@ -21,7 +21,7 @@ export default function SignupForm(props) {
 
     return (
         <>
-            <div className={Styles.heading}>Signup</div>
+            <h2 className={Styles.heading}>Signup</h2>
             <div className={Styles.formDiv}>
                 <input 
                     className={Styles.email} 

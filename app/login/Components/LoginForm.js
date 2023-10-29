@@ -21,10 +21,9 @@ export default function LoginForm(props) {
         }
     }
 
-
     return (
         <>
-            <div className={Styles.heading}>Login</div>
+            <h2 className={Styles.heading}>Login</h2>
             <div className={Styles.formDiv}>
                 <input 
                     className={Styles.email} 

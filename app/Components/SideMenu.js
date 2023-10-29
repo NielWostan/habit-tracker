@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import { signOut } from "next-auth/react"
 
 export default function SideMenu() {
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false)
@@ -15,7 +16,7 @@ export default function SideMenu() {
         <Link href = "/" onClick={toggleSideMenu}>Home</Link>
         <Link href = "/profile" onClick={toggleSideMenu}>Profile</Link>
         <Link href = "/global" onClick={toggleSideMenu}>Global</Link>
-        <Link href = "/login" onClick={toggleSideMenu}>Logout</Link>
+        <Link href = "/login" onClick={toggleSideMenu}><p onClick={()=>signOut()}>Logout</p></Link>
         {/* Setting page */}
     </div>
     <style jsx>
