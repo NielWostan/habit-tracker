@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from "react"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import Styles from "../page.module.css"
-import {signIn} from "next-auth/react"
-import { useRouter } from "next/navigation"
 
-export default function LoginForm(props) {
+export default function LoginForm() {
 
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")

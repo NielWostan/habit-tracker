@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth"
-import Styles from "./page.module.css"
 import { authOptions } from "@/library/auth"
+import Styles from "./page.module.css"
 import Link from "next/link"
 
 export default async function Home() {

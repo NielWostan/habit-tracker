@@ -9,6 +9,10 @@ export default function SideMenu() {
     function toggleSideMenu() {
         setIsSideMenuOpen(prevVal => !prevVal)
     }
+    function logOut() {
+        setIsSideMenuOpen(prevVal => !prevVal)
+        signOut()
+    }
   return (
     <>
     <button onClick={toggleSideMenu} className="openSideMenuBtn">=</button>
@@ -16,7 +20,7 @@ export default function SideMenu() {
         <Link href = "/" onClick={toggleSideMenu}>Home</Link>
         <Link href = "/profile" onClick={toggleSideMenu}>Profile</Link>
         <Link href = "/global" onClick={toggleSideMenu}>Global</Link>
-        <Link href = "/login" onClick={toggleSideMenu}><p onClick={()=>signOut()}>Logout</p></Link>
+        <Link href = "/login" onClick={logOut}>Logout</Link>
         {/* Setting page */}
     </div>
     <style jsx>

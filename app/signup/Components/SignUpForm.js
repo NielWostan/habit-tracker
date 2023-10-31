@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Styles from "../page.module.css"
 
-export default function SignupForm(props) {
+export default function SignupForm() {
 
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
