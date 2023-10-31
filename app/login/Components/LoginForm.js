@@ -22,7 +22,7 @@ export default function LoginForm() {
     }
 
     return (
-        <>
+        <div className={Styles.mainDiv}>
             <h2 className={Styles.heading}>Login</h2>
             <div className={Styles.formDiv}>
                 <input 
@@ -41,8 +41,8 @@ export default function LoginForm() {
                 <button className={Styles.submitBtn} onClick={() => login()}>Submit</button>
             </div>
             <div>
-                <Link href="/signup">Signup</Link>
+                <Link href="/signup" className={Styles.link}>Signup</Link>
             </div>
-        </>
+        </div>
     )
 }

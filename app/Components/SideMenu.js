@@ -15,12 +15,12 @@ export default function SideMenu() {
     }
   return (
     <>
-    <button onClick={toggleSideMenu} className="openSideMenuBtn">=</button>
+    <button onClick={toggleSideMenu} className="openSideMenuBtn"><img src="https://static.thenounproject.com/png/1614627-200.png"/></button>
     <div className="sideMenu">
-        <Link href = "/" onClick={toggleSideMenu}>Home</Link>
-        <Link href = "/profile" onClick={toggleSideMenu}>Profile</Link>
-        <Link href = "/global" onClick={toggleSideMenu}>Global</Link>
-        <Link href = "/login" onClick={logOut}>Logout</Link>
+        <Link href = "/" onClick={toggleSideMenu} style={{textDecoration: "none"}}><p className="link">Home</p></Link>
+        <Link href = "/profile" onClick={toggleSideMenu} style={{textDecoration: "none"}}><p className="link">Profile</p></Link>
+        <Link href = "/global" onClick={toggleSideMenu} style={{textDecoration: "none"}}><p className="link">Global</p></Link>
+        <Link href = "/login" onClick={logOut} style={{textDecoration: "none"}}><p className="link">Logout</p></Link>
         {/* Setting page */}
     </div>
     <style jsx>
@@ -28,28 +28,48 @@ export default function SideMenu() {
             .header {
                 display: flex;
             }
+
             .sideMenu {
-                border: 1px solid red;
                 background-color: white;
                 height: 100%;
                 position: fixed;
                 display: ${isSideMenuOpen ? "flex" : "none"};
                 flex-direction: column;
-                width: 10vw;
+                width: 15vw;
+                background-color: #324359;
+                padding: 15px;
+                color: white;
+            }
+
+            .link {
+                color: white;
+                font-size: 20px;
+                margin: 8px 0px;
+                text-decoration: none;
+                height: min-content;
+            }
+
+            img {
+                height: 25px;
             }
 
             .openSideMenuBtn  {
-                display: ${isSideMenuOpen ? "none" : "flex"};
-                height: 25px;
-                width: 25px;
+                display: flex;
                 align-items: center;
                 justify-content: center;
                 position: fixed;
+                background-color: #D9B6A3;
+                border: none;
+                margin: 10px;
+                color: #324359;
+                border-radius: 8px;
+                height: 32px;
+                width: 32px;
+                margin-left: ${isSideMenuOpen ? "15.75vw" : "10px"}
             }
 
-            .sideMenuDiv1 {
-                display: flex;
-                flex-direction: column;
+            .openSideMenuBtn:hover {
+                cursor: pointer;
             }
         `}
     </style>

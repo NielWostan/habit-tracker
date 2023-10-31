@@ -5,5 +5,21 @@
 }
 
 .pageHeading {
+    margin-top: 30px;
+    color: white;
+    font-size: 35px;
+}
+
+.logOutHeading {
+    margin-top: 125px;
+    color: white;
+    font-size: 45px;
+}
+
+.logOutLink {
+    text-decoration: underline;
+    color: white;
+    text-underline-offset: 4px;
+    font-size: 25px;
     margin-top: 25px;
 }

@@ -12,10 +12,16 @@ export default function HabitSlot(props) {
         <style jsx>
             {`
                 .habitSlot {
-                    background-color: ${props.isChecked ? "blue" : "grey"};
-                    height: 100%;
-                    width: 18px;
+                    background-color: ${props.isChecked ? "#324359" : "#D9B6A3"};
+                    border-radius: 8px;
+                    height: 80%;
+                    width: 32px;
+                    align-self: center
                 }
+
+                .habitSlot:hover {
+                    cursor: pointer;
+                  }
             `}
         </style>
     </>

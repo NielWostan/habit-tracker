@@ -36,8 +36,8 @@ export default async function Home() {
           <HabitsList data = {habits} currentUserId = {userData?.id}/>
         </>:
         <>
-        <h2 className={Styles.pageHeading}>You were logged out</h2>
-        <Link href="/login">Log back in</Link>
+        <h2 className={Styles.logOutHeading}>You were logged out</h2>
+        <Link href="/login" className={Styles.logOutLink}>Log back in</Link>
         </>
       }
     </main>

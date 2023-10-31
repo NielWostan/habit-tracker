@@ -3,28 +3,61 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid red;
-    height: 50vh
+}
+
+.mainDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .heading {
-    margin: 25px;
+    margin-top: 125px;
+    color: white;
+    font-size: 45px;
 }
 
 .formDiv {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .submitBtn {
-    height: 25px;
-    width: 100%;
-    margin: 15px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 80px;
+    border-radius: 8px;
+    background-color: white;
+    border: none;
+    font-size: 18px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.submitBtn:hover {
+    cursor: pointer;
 }
 
 .email,
 .password,
 .username {
-    height: 25px;
-    margin: 5px;
+    display: flex;
+    height: 30px;
+    width: 100%;
+    padding-left: 8px;
+    outline: none;
+    font-size: 20px;
+    border-radius: 8px;
+    border: none;
+    margin: 25px 0px 0px 0px;
+}
+
+.link {
+    text-decoration: underline;
+    color: white;
+    text-underline-offset: 4px;
+    font-size: 25px;
 }

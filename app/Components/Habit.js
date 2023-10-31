@@ -39,16 +39,20 @@ export default function Habit(props) {
         {`
           .habit {
             display: flex;
-            border: 1px solid green;
             justify-content: space-between;
-            height: 25px;
+            height: 40px;
+            margin: 10px;
+            background-color: #96505B;
           }
          .habitName {
             width: 25%;
+            color: white;
+            align-self: center;
+            margin-left: 15px;
+            font-size: 20px
           }
           .habitList {
             display: flex;
-            border: 1px solid pink;
             width: 75%;
             justify-content: space-around;
           }

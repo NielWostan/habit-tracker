@@ -10,10 +10,9 @@ export default async function Home() {
   return (
     <main className={Styles.main}>
       <h2 className={Styles.pageHeading}>Landing page</h2>
-      <div className={Styles.links}>
-        {session?.user?.name ? <Link href={`/${session.user.name}`} className={Styles.link}>Your account</Link> : null}
-        <Link href="/login" className={Styles.link}>Login</Link>
-      </div>
+        {session?.user?.name ? 
+        <Link href={`/${session.user.name}`} className={Styles.link}>Your account</Link> : 
+        <Link href="/login" className={Styles.link}>Login</Link>}
     </main> 
   )
 }

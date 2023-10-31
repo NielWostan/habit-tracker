@@ -20,7 +20,7 @@ export default function SignupForm() {
     }
 
     return (
-        <>
+        <div className={Styles.mainDiv}>
             <h2 className={Styles.heading}>Signup</h2>
             <div className={Styles.formDiv}>
                 <input 
@@ -45,8 +45,8 @@ export default function SignupForm() {
                 <button className={Styles.submitBtn} onClick={() => handleSubmit()}>Submit</button>
             </div>
             <div>
-                <Link href="/login">Login</Link>
+                <Link href="/login" className={Styles.link}>Login</Link>
             </div>
-        </>
+        </div>
     )
 }

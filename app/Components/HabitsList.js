@@ -33,9 +33,10 @@ export default function HabitsList(props) {
                     .habitsList {
                         disply: flex;
                         flex-direction: column;
+                        justify-content: space-evenly;
                         width: 98vw;
                         margin: 25px;
-                        justify-content: center;
+                        height: ${(data.length + 1) * 50}px;
                     }
                 `}
             </style>
