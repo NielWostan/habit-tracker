@@ -1,7 +1,7 @@
 html {
     box-sizing: border-box;
     height: 100%;
-    border: 2px solid green;
+    background-color: #96505B;
 }
 
 *,
