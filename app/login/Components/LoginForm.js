@@ -17,7 +17,7 @@ export default function LoginForm() {
         const loginData = await signIn('credentials',{email: email, password: password, redirect: false})
         console.log(loginData)
         if (!loginData.error) {
-            router.replace("/")
+            router.replace(`/${email}`)
         }
     }
 

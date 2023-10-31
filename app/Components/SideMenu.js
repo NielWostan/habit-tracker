@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { signOut } from "next-auth/react"
 
-export default function SideMenu() {
+export default function SideMenu(props) {
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(false)
     function toggleSideMenu() {
         setIsSideMenuOpen(prevVal => !prevVal)
@@ -13,13 +13,14 @@ export default function SideMenu() {
         setIsSideMenuOpen(prevVal => !prevVal)
         signOut()
     }
+    console.log(props)
   return (
     <>
-    <button onClick={toggleSideMenu} className="openSideMenuBtn"><img src="https://static.thenounproject.com/png/1614627-200.png"/></button>
+    <button onClick={toggleSideMenu} className="openSideMenuBtn"><img src="https://static.thenounproject.com/png/1614627-200.png" style={{height: "25px"}}/></button>
     <div className="sideMenu">
-        <Link href = "/" onClick={toggleSideMenu} style={{textDecoration: "none"}}><p className="link">Home</p></Link>
-        <Link href = "/profile" onClick={toggleSideMenu} style={{textDecoration: "none"}}><p className="link">Profile</p></Link>
-        <Link href = "/global" onClick={toggleSideMenu} style={{textDecoration: "none"}}><p className="link">Global</p></Link>
+        <Link href = {`/${props?.data?.name}`} onClick={toggleSideMenu} style={{textDecoration: "none"}}><p className="link">Home</p></Link>
+        <Link href = {`/${props?.data?.name}/profile`} onClick={toggleSideMenu} style={{textDecoration: "none"}}><p className="link">Profile</p></Link>
+        <Link href = {`/${props?.data?.name}/global`} onClick={toggleSideMenu} style={{textDecoration: "none"}}><p className="link">Global</p></Link>
         <Link href = "/login" onClick={logOut} style={{textDecoration: "none"}}><p className="link">Logout</p></Link>
         {/* Setting page */}
     </div>
@@ -47,10 +48,6 @@ export default function SideMenu() {
                 margin: 8px 0px;
                 text-decoration: none;
                 height: min-content;
-            }
-
-            img {
-                height: 25px;
             }
 
             .openSideMenuBtn  {

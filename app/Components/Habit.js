@@ -11,6 +11,7 @@ export default function Habit(props) {
   const [habitId,setProjectId] = useState(props.data.id)
 
   const router = useRouter()
+  
   async function toggleChange(habitSlotId,isChecked) {
     isChecked = !isChecked
     await fetch('../api/updateProgress', {
