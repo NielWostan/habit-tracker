@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 import HabitSlot from "./HabitSlot";
 
@@ -9,12 +8,11 @@ export default function Habit(props) {
   const [data, setData] = useState(props.data);
   const [habitId, setHabtId] = useState(props.data.id);
 
-  const router = useRouter();
-
   async function toggleChange(habitSlotId, isChecked) {
     isChecked = !isChecked;
+    // Update screen
     setData((prevData) => ({ ...prevData, [habitSlotId]: isChecked }));
-    console.log(data);
+    // Update dataset
     await fetch("../api/updateProgress", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -24,7 +22,6 @@ export default function Habit(props) {
 
   function triggerDeleteHabit(habitId) {
     props.triggerDeleteHabit(habitId);
-    console.log("ran");
   }
 
   return (
@@ -35,7 +32,7 @@ export default function Habit(props) {
           className="deleteButton"
           onClick={() => triggerDeleteHabit(habitId)}
         >
-          x
+          X
         </button>
       </div>
       <div className="habitList">
@@ -59,11 +56,28 @@ export default function Habit(props) {
           .habitName {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             width: 25%;
             color: white;
             align-self: center;
             margin-left: 15px;
             font-size: 20px;
+          }
+          .deleteButton {
+            height: 30px;
+            width: 30px;
+            background-color: transparent;
+            outline: none;
+            border: 2px solid #d9b6a3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            padding-bottom: 1px;
+            color: #ffffff;
+          }
+          .deleteButton:hover {
+            cursor: pointer;
           }
           .habitList {
             display: flex;

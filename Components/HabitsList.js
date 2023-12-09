@@ -10,6 +10,7 @@ export default function HabitsList(props) {
   const [count, setCount] = useState(props.data.length);
 
   async function triggerAddNewHabit(newHabitName) {
+    // Update screen
     setData((prevData) => [
       ...prevData,
       {
@@ -25,11 +26,13 @@ export default function HabitsList(props) {
         projectId: projectId,
       },
     ]);
+    // Update habits dataset - Adding the habit
     await fetch("../api/addHabit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ newHabitName, projectId, count }),
     });
+    // Update user dataset - Incrementing count
     const action = "increment";
     await fetch("../api/updateUserCount", {
       method: "PUT",
@@ -39,6 +42,7 @@ export default function HabitsList(props) {
   }
 
   async function triggerDeleteHabit(habitId) {
+    // Update screen
     setData((prevData) => {
       let newData = [];
       for (let i = 0; i < prevData.length; i++) {
@@ -48,16 +52,19 @@ export default function HabitsList(props) {
       }
       return newData;
     });
+    // Update habits dataset - Deleting the habit
     await fetch("../api/deleteHabit", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ habitId }),
     });
+    // Update habits dataset - Reordering the listed count
     await fetch("../api/updateHabitsCount", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ habitId, projectId }),
     });
+    // Update user dataset - Decrementing count
     const action = "decrement";
     await fetch("../api/updateUserCount", {
       method: "PUT",
