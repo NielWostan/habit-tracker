@@ -1,45 +1,46 @@
-import Styles from "./page.module.css"
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/library/auth"
-import HabitsList from "../Components/HabitsList"
-import prisma from "@/library/prisma"
-import Link from "next/link"
+import Styles from "./page.module.css";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/library/auth";
+import HabitsList from "../../Components/HabitsList";
+import prisma from "@/library/prisma";
+import Link from "next/link";
 
 export default async function Home() {
-
-  const session = await getServerSession(authOptions)
-  let userData
+  const session = await getServerSession(authOptions);
+  let userData;
 
   if (session) {
     userData = await prisma.user.findUnique({
       where: {
-        name: session?.user?.name
-      }
-    })
+        name: session?.user?.name,
+      },
+    });
   }
 
   const data = await prisma.Habits.findMany();
-  let habits = []
+  let habits = [];
   for (let i = 0; i < data.length; i++) {
     if (data[i].projectId == userData?.id) {
-      habits.push(data[i])
+      habits.push(data[i]);
     }
   }
-  habits.sort((a,b) => a.id - b.id)
+  habits.sort((a, b) => a.id - b.id);
 
-  
   return (
     <main className={Styles.main}>
-      {session?.user?.name ?
+      {session?.user?.name ? (
         <>
           <h2 className={Styles.pageHeading}>Home page for {userData?.name}</h2>
-          <HabitsList data = {habits} currentUserId = {userData?.id}/>
-        </>:
-        <>
-        <h2 className={Styles.logOutHeading}>You were logged out</h2>
-        <Link href="/login" className={Styles.logOutLink}>Log back in</Link>
+          <HabitsList data={habits} currentUserId={userData?.id} />
         </>
-      }
+      ) : (
+        <>
+          <h2 className={Styles.logOutHeading}>You were logged out</h2>
+          <Link href="/login" className={Styles.logOutLink}>
+            Log back in
+          </Link>
+        </>
+      )}
     </main>
-  )
+  );
 }
