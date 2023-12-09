@@ -22,10 +22,21 @@ export default function Habit(props) {
     });
   }
 
+  function triggerDeleteHabit(habitId) {
+    props.triggerDeleteHabit(habitId);
+    console.log("ran");
+  }
+
   return (
     <div className="habit">
       <div className="habitName">
         <p>{props.data.title}</p>
+        <button
+          className="deleteButton"
+          onClick={() => triggerDeleteHabit(habitId)}
+        >
+          x
+        </button>
       </div>
       <div className="habitList">
         <HabitSlot id={1} isChecked={data.day1} toggleChange={toggleChange} />
@@ -46,6 +57,8 @@ export default function Habit(props) {
             background-color: #96505b;
           }
           .habitName {
+            display: flex;
+            justify-content: space-between;
             width: 25%;
             color: white;
             align-self: center;

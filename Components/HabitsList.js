@@ -7,10 +7,9 @@ import AddHabit from "./AddHabit";
 export default function HabitsList(props) {
   const [data, setData] = useState(props.data);
   const [projectId, setProjectId] = useState(props.currentUserId);
-  const [count, setCount] = useState(props.currentUserCount);
+  const [count, setCount] = useState(props.data.length);
 
   async function triggerAddNewHabit(newHabitName) {
-    console.log(data);
     setData((prevData) => [
       ...prevData,
       {
@@ -31,15 +30,48 @@ export default function HabitsList(props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ newHabitName, projectId, count }),
     });
+    const action = "increment";
     await fetch("../api/updateUserCount", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ projectId, count }),
+      body: JSON.stringify({ projectId, action }),
+    });
+  }
+
+  async function triggerDeleteHabit(habitId) {
+    setData((prevData) => {
+      let newData = [];
+      for (let i = 0; i < prevData.length; i++) {
+        if (prevData[i].id !== habitId) {
+          newData.push(prevData[i]);
+        }
+      }
+      return newData;
+    });
+    await fetch("../api/deleteHabit", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ habitId }),
+    });
+    await fetch("../api/updateHabitsCount", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ habitId, projectId }),
+    });
+    const action = "decrement";
+    await fetch("../api/updateUserCount", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectId, action }),
     });
   }
 
   const dataElements = data.map((dataEl) => (
-    <Habit data={dataEl} key={dataEl.id} />
+    <Habit
+      data={dataEl}
+      key={dataEl.count}
+      triggerDeleteHabit={triggerDeleteHabit}
+    />
   ));
 
   return (

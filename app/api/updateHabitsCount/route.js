@@ -3,13 +3,19 @@ import { NextResponse } from "next/server";
 
 export async function PUT(request) {
   const res = await request.json();
-  const { projectId, action } = res;
-  const result = await prisma.user.update({
+  const { habitId, projectId } = res;
+
+  const result = await prisma.habits.updateMany({
     where: {
-      id: projectId,
+      id: {
+        gt: habitId,
+      },
+      projectId: projectId,
     },
     data: {
-      count: action == "increment" ? { increment: 1 } : { decrement: 1 },
+      count: {
+        decrement: 1,
+      },
     },
   });
 
