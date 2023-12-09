@@ -7,12 +7,14 @@ import AddHabit from "./AddHabit";
 export default function HabitsList(props) {
   const [data, setData] = useState(props.data);
   const [projectId, setProjectId] = useState(props.currentUserId);
+  const [count, setCount] = useState(props.currentUserCount);
 
   async function triggerAddNewHabit(newHabitName) {
     console.log(data);
     setData((prevData) => [
       ...prevData,
       {
+        count: count,
         title: newHabitName,
         day1: false,
         day2: false,
@@ -27,7 +29,12 @@ export default function HabitsList(props) {
     await fetch("../api/addHabit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ newHabitName, projectId }),
+      body: JSON.stringify({ newHabitName, projectId, count }),
+    });
+    await fetch("../api/updateUserCount", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectId, count }),
     });
   }
 

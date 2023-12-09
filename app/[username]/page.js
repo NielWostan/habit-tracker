@@ -31,7 +31,11 @@ export default async function Home() {
       {session?.user?.name ? (
         <>
           <h2 className={Styles.pageHeading}>Home page for {userData?.name}</h2>
-          <HabitsList data={habits} currentUserId={userData?.id} />
+          <HabitsList
+            data={habits}
+            currentUserId={userData?.id}
+            currentUserCount={userData?.count}
+          />
         </>
       ) : (
         <>
