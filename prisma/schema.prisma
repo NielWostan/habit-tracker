@@ -12,6 +12,7 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
+  count Int?
   name String? @unique
   email String? @unique
   password String?
@@ -20,6 +21,7 @@ model User {
 
 model Habits {
   id Int @id @default(autoincrement())
+  count Int?
   title String?
   day1 Boolean
   day2 Boolean
