@@ -28,12 +28,6 @@ export default function Habit(props) {
     <div className="habit">
       <div className="habitName">
         <p>{props.data.title}</p>
-        <button
-          className="deleteButton"
-          onClick={() => triggerDeleteHabit(habitId)}
-        >
-          X
-        </button>
       </div>
       <div className="habitList">
         <HabitSlot id={1} isChecked={data.day1} toggleChange={toggleChange} />
@@ -44,6 +38,12 @@ export default function Habit(props) {
         <HabitSlot id={6} isChecked={data.day6} toggleChange={toggleChange} />
         <HabitSlot id={7} isChecked={data.day7} toggleChange={toggleChange} />
       </div>
+      <button
+        className="deleteButton"
+        onClick={() => triggerDeleteHabit(habitId)}
+      >
+        X
+      </button>
       <style jsx>
         {`
           .habit {
@@ -64,17 +64,19 @@ export default function Habit(props) {
             font-size: 20px;
           }
           .deleteButton {
-            height: 30px;
-            width: 30px;
+            height: 20px;
+            width: 20px;
             background-color: transparent;
             outline: none;
-            border: 2px solid #d9b6a3;
+            border: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 25px;
+            font-size: 15px;
             padding-bottom: 1px;
             color: #ffffff;
+            align-self: center;
+            margin-right: 10px;
           }
           .deleteButton:hover {
             cursor: pointer;

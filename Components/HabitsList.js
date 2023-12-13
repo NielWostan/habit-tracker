@@ -9,13 +9,31 @@ export default function HabitsList(props) {
   const [projectId, setProjectId] = useState(props.currentUserId);
   const [count, setCount] = useState(props.data.length);
 
-  async function triggerAddNewHabit(newHabitName) {
+  function getTitle(habitId) {
+    switch (habitId) {
+      case 4:
+        return "Reading";
+      case 3:
+        return "Journal";
+      case 2:
+        return "Workout";
+      case 1:
+        return "Meditation";
+      default:
+        alert("Error");
+        break;
+    }
+  }
+
+  async function triggerAddNewHabit(habitId) {
     // Update screen
+    const title = getTitle(habitId);
     setData((prevData) => [
       ...prevData,
       {
+        habitId: habitId,
         count: count,
-        title: newHabitName,
+        title: title,
         day1: false,
         day2: false,
         day3: false,
@@ -30,7 +48,7 @@ export default function HabitsList(props) {
     await fetch("../api/addHabit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ newHabitName, projectId, count }),
+      body: JSON.stringify({ title, habitId, projectId, count }),
     });
     // Update user dataset - Incrementing count
     const action = "increment";

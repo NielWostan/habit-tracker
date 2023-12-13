@@ -21,8 +21,9 @@ model User {
 
 model Habits {
   id Int @id @default(autoincrement())
+  habitId Int
   count Int?
-  title String?
+  title String
   day1 Boolean
   day2 Boolean
   day3 Boolean
