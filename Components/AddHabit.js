@@ -2,76 +2,36 @@
 
 import { useState } from "react";
 
-export default function AddHabit(props) {
-  const [isAddHabitPopUpShown, setIsAddHabitPopUpShown] = useState(false);
+export default function AddHabit({ pushHabit }) {
+  const [isPopUpShown, setIsPopUpShown] = useState(false);
 
-  function toggleAddHabitPopUp() {
-    setIsAddHabitPopUpShown((prevValue) => !prevValue);
+  function togglePopUp() {
+    setIsPopUpShown((prevValue) => !prevValue);
   }
 
-  function triggerAddNewHabit(date, habitId) {
-    props.triggerAddNewHabit(date, habitId);
-    setIsAddHabitPopUpShown(false);
+  function addHabit(habitId) {
+    pushHabit(habitId);
+    setIsPopUpShown(false);
   }
 
   return (
     <>
-      <button onClick={toggleAddHabitPopUp} className="addAHabitButton">
+      <button onClick={togglePopUp} className="addAHabitButton">
         New
       </button>
       <div className="addHabitPopUp">
         <h3 className="addAHabitHeading">Choose Your Habit</h3>
         <div className="buttonDiv">
-          <button
-            className="choiceButton"
-            onClick={() =>
-              triggerAddNewHabit(
-                `${
-                  new Date().getMonth() + 1
-                }/${new Date().getDate()}/${new Date().getFullYear()}`,
-                1
-              )
-            }
-          >
+          <button className="choiceButton" onClick={() => addHabit(1)}>
             Meditation
           </button>
-          <button
-            className="choiceButton"
-            onClick={() =>
-              triggerAddNewHabit(
-                `${
-                  new Date().getMonth() + 1
-                }/${new Date().getDate()}/${new Date().getFullYear()}`,
-                2
-              )
-            }
-          >
+          <button className="choiceButton" onClick={() => addHabit(2)}>
             Workout
           </button>
-          <button
-            className="choiceButton"
-            onClick={() =>
-              triggerAddNewHabit(
-                `${
-                  new Date().getMonth() + 1
-                }/${new Date().getDate()}/${new Date().getFullYear()}`,
-                3
-              )
-            }
-          >
+          <button className="choiceButton" onClick={() => addHabit(3)}>
             Journal
           </button>
-          <button
-            className="choiceButton"
-            onClick={() =>
-              triggerAddNewHabit(
-                `${
-                  new Date().getMonth() + 1
-                }/${new Date().getDate()}/${new Date().getFullYear()}`,
-                4
-              )
-            }
-          >
+          <button className="choiceButton" onClick={() => addHabit(4)}>
             Reading
           </button>
         </div>
@@ -95,7 +55,7 @@ export default function AddHabit(props) {
           }
 
           .addHabitPopUp {
-            display: ${isAddHabitPopUpShown ? "flex" : "none"};
+            display: ${isPopUpShown ? "flex" : "none"};
             position: absolute;
             height: max-content;
             width: 500px;

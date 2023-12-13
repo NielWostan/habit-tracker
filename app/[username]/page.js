@@ -17,25 +17,21 @@ export default async function Home() {
     });
   }
 
-  const data = await prisma.Habits.findMany();
-  let habits = [];
-  for (let i = 0; i < data.length; i++) {
-    if (data[i].projectId == userData?.id) {
-      habits.push(data[i]);
-    }
-  }
-  habits.sort((a, b) => a.id - b.id);
+  const data = await prisma.habits.findMany({
+    where: {
+      projectId: userData.id,
+    },
+    orderBy: {
+      id: "asc",
+    },
+  });
 
   return (
     <main className={Styles.main}>
       {session?.user?.name ? (
         <>
           <h2 className={Styles.pageHeading}>Home page for {userData?.name}</h2>
-          <HabitsList
-            data={habits}
-            currentUserId={userData?.id}
-            currentUserCount={userData?.count}
-          />
+          <HabitsList data={data} userId={userData?.id} />
         </>
       ) : (
         <>

@@ -1,20 +1,17 @@
 "use client";
 
-export default function HabitSlot(props) {
-  function toggleChange() {
-    props.toggleChange(`day${props.id}`, props.isChecked);
+export default function HabitSlot({ date, toggleChange }) {
+  function registerClick(date) {
+    toggleChange(date);
   }
 
   return (
     <>
-      <div
-        className="habitSlot"
-        onClick={() => toggleChange(`day${props.id}`, props.isChecked)}
-      ></div>
+      <div className="habitSlot" onClick={() => registerClick(`${date}`)}></div>
       <style jsx>
         {`
           .habitSlot {
-            background-color: ${props.isChecked ? "#324359" : "#D9B6A3"};
+            background-color: #d9b6a3;
             border-radius: 8px;
             height: 80%;
             width: 32px;

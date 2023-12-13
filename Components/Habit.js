@@ -1,47 +1,33 @@
 "use client";
 
 import { useState } from "react";
-
 import HabitSlot from "./HabitSlot";
+import { getDate } from "@/library/getDate";
 
-export default function Habit(props) {
-  const [data, setData] = useState(props.data);
-  const [habitId, setHabtId] = useState(props.data.id);
-
-  async function toggleChange(habitSlotId, isChecked) {
-    isChecked = !isChecked;
-    // Update screen
-    setData((prevData) => ({ ...prevData, [habitSlotId]: isChecked }));
-    // Update dataset
+export default function Habit({ id, title, dropHabit }) {
+  async function toggleChange(date) {
     await fetch("../api/updateProgress", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ habitId, habitSlotId, isChecked }),
+      body: JSON.stringify({ id, date }),
     });
   }
 
-  function triggerDeleteHabit(habitId) {
-    props.triggerDeleteHabit(habitId);
+  function deleteHabit(id) {
+    dropHabit(id);
   }
 
   return (
     <div className="habit">
       <div className="habitName">
-        <p>{props.data.title}</p>
+        <p>{title}</p>
       </div>
       <div className="habitList">
-        <HabitSlot id={1} isChecked={data.day1} toggleChange={toggleChange} />
-        <HabitSlot id={2} isChecked={data.day2} toggleChange={toggleChange} />
-        <HabitSlot id={3} isChecked={data.day3} toggleChange={toggleChange} />
-        <HabitSlot id={4} isChecked={data.day4} toggleChange={toggleChange} />
-        <HabitSlot id={5} isChecked={data.day5} toggleChange={toggleChange} />
-        <HabitSlot id={6} isChecked={data.day6} toggleChange={toggleChange} />
-        <HabitSlot id={7} isChecked={data.day7} toggleChange={toggleChange} />
+        <HabitSlot date={getDate(0)} toggleChange={toggleChange} />
+        <HabitSlot date={getDate(-1)} toggleChange={toggleChange} />
+        <HabitSlot date={getDate(-2)} toggleChange={toggleChange} />
       </div>
-      <button
-        className="deleteButton"
-        onClick={() => triggerDeleteHabit(habitId)}
-      >
+      <button className="deleteButton" onClick={() => deleteHabit(id)}>
         X
       </button>
       <style jsx>

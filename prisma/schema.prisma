@@ -24,7 +24,7 @@ model Habits {
   habitId Int
   count Int?
   title String
-  completedList DateTime[]
+  completedList String[]
   project User @relation(fields: [projectId], references: [id])
   projectId Int
 }
