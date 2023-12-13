@@ -1,6 +1,6 @@
 "use client";
 
-export default function HabitSlot({ date, toggleChange }) {
+export default function HabitSlot({ date, progress, toggleChange }) {
   function registerClick(date) {
     toggleChange(date);
   }
@@ -11,7 +11,9 @@ export default function HabitSlot({ date, toggleChange }) {
       <style jsx>
         {`
           .habitSlot {
-            background-color: #d9b6a3;
+            background-color: ${progress.includes(date)
+              ? "#324359"
+              : "#d9b6a3"};
             border-radius: 8px;
             height: 80%;
             width: 32px;

@@ -55,7 +55,6 @@ export default function SideMenu(props) {
           }
 
           .sideMenu {
-            background-color: white;
             height: 100%;
             position: fixed;
             display: ${isSideMenuOpen ? "flex" : "none"};

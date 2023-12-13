@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import HabitSlot from "./HabitSlot";
 import { getDate } from "@/library/getDate";
 
-export default function Habit({ id, title, dropHabit }) {
+export default function Habit({ id, title, progress, dropHabit }) {
   async function toggleChange(date) {
     await fetch("../api/updateProgress", {
       method: "PUT",
@@ -23,9 +22,21 @@ export default function Habit({ id, title, dropHabit }) {
         <p>{title}</p>
       </div>
       <div className="habitList">
-        <HabitSlot date={getDate(0)} toggleChange={toggleChange} />
-        <HabitSlot date={getDate(-1)} toggleChange={toggleChange} />
-        <HabitSlot date={getDate(-2)} toggleChange={toggleChange} />
+        <HabitSlot
+          date={getDate(0)}
+          progress={progress}
+          toggleChange={toggleChange}
+        />
+        <HabitSlot
+          date={getDate(-1)}
+          progress={progress}
+          toggleChange={toggleChange}
+        />
+        <HabitSlot
+          date={getDate(-2)}
+          progress={progress}
+          toggleChange={toggleChange}
+        />
       </div>
       <button className="deleteButton" onClick={() => deleteHabit(id)}>
         X

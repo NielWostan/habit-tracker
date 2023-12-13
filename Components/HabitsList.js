@@ -1,6 +1,5 @@
 "use client"; // can be made server component after removing styled jsx
 
-import { useState } from "react";
 import Habit from "./Habit";
 import AddHabit from "./AddHabit";
 import { getTitle } from "@/library/getTitle";
@@ -23,11 +22,12 @@ export default function HabitsList({ data, userId }) {
     });
   }
 
-  const dataElements = data.map((dataEl) => (
+  const dataElements = data?.map((dataEl) => (
     <Habit
       key={dataEl.id}
       id={dataEl.id}
       title={dataEl.title}
+      progress={dataEl.completedList}
       dropHabit={dropHabit}
     />
   ));
@@ -44,7 +44,7 @@ export default function HabitsList({ data, userId }) {
             justify-content: space-evenly;
             width: 98vw;
             margin: 25px;
-            height: ${(data.length + 1) * 50}px;
+            height: ${(data?.length + 1) * 50}px;
           }
         `}
       </style>
