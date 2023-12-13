@@ -6,6 +6,10 @@ import { getTitle } from "@/library/getTitle";
 import { useState } from "react";
 import { updateHabits } from "@/library/updateHabits";
 
+// To work on
+// Add feature
+// Uncheck feature
+
 export default function HabitsList({ data, userId }) {
   const [habits, setHabits] = useState(data);
   console.log("ran");
