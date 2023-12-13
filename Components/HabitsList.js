@@ -1,11 +1,17 @@
-"use client"; // can be made server component after removing styled jsx
+"use client";
 
 import Habit from "./Habit";
 import AddHabit from "./AddHabit";
 import { getTitle } from "@/library/getTitle";
+import { useState } from "react";
+import { updateHabits } from "@/library/updateHabits";
 
 export default function HabitsList({ data, userId }) {
+  const [habits, setHabits] = useState(data);
+  console.log("ran");
+
   async function pushHabit(habitId) {
+    setHabits((prev) => updateHabits(prev, "add", habitId, null, null)); // Update habits
     const title = getTitle(habitId);
     await fetch("../api/addHabit", {
       method: "POST",
@@ -14,21 +20,32 @@ export default function HabitsList({ data, userId }) {
     });
   }
 
-  async function dropHabit(habitId) {
+  async function dropHabit(id) {
+    setHabits((prev) => updateHabits(prev, "delete", null, id, null)); // Update habits
     await fetch("../api/deleteHabit", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ habitId }),
+      body: JSON.stringify({ id }),
     });
   }
 
-  const dataElements = data?.map((dataEl) => (
+  async function handleChange(id, date) {
+    setHabits((prev) => updateHabits(prev, "check", null, id, date)); // Update habits
+    await fetch("../api/updateProgress", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, date }),
+    });
+  }
+
+  const dataElements = habits?.map((dataEl) => (
     <Habit
       key={dataEl.id}
       id={dataEl.id}
       title={dataEl.title}
       progress={dataEl.completedList}
       dropHabit={dropHabit}
+      handleChange={handleChange}
     />
   ));
 
@@ -44,7 +61,7 @@ export default function HabitsList({ data, userId }) {
             justify-content: space-evenly;
             width: 98vw;
             margin: 25px;
-            height: ${(data?.length + 1) * 50}px;
+            height: ${(habits?.length + 1) * 50}px;
           }
         `}
       </style>

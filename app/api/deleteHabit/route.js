@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(request) {
   const res = await request.json();
-  const { habitId } = res;
+  const { id } = res;
 
   const result = await prisma.habits.delete({
     where: {
-      id: habitId,
+      id: id,
     },
   });
 

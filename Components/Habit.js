@@ -3,13 +3,15 @@
 import HabitSlot from "./HabitSlot";
 import { getDate } from "@/library/getDate";
 
-export default function Habit({ id, title, progress, dropHabit }) {
+export default function Habit({
+  id,
+  title,
+  progress,
+  dropHabit,
+  handleChange,
+}) {
   async function toggleChange(date) {
-    await fetch("../api/updateProgress", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, date }),
-    });
+    handleChange(id, date);
   }
 
   function deleteHabit(id) {
