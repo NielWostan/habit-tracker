@@ -25,7 +25,7 @@ export default function HabitsList(props) {
     }
   }
 
-  async function triggerAddNewHabit(habitId) {
+  async function triggerAddNewHabit(date, habitId) {
     // Update screen
     const title = getTitle(habitId);
     setData((prevData) => [

@@ -9,8 +9,8 @@ export default function AddHabit(props) {
     setIsAddHabitPopUpShown((prevValue) => !prevValue);
   }
 
-  function triggerAddNewHabit(habitId) {
-    props.triggerAddNewHabit(habitId);
+  function triggerAddNewHabit(date, habitId) {
+    props.triggerAddNewHabit(date, habitId);
     setIsAddHabitPopUpShown(false);
   }
 
@@ -24,25 +24,53 @@ export default function AddHabit(props) {
         <div className="buttonDiv">
           <button
             className="choiceButton"
-            onClick={() => triggerAddNewHabit(1)}
+            onClick={() =>
+              triggerAddNewHabit(
+                `${
+                  new Date().getMonth() + 1
+                }/${new Date().getDate()}/${new Date().getFullYear()}`,
+                1
+              )
+            }
           >
             Meditation
           </button>
           <button
             className="choiceButton"
-            onClick={() => triggerAddNewHabit(2)}
+            onClick={() =>
+              triggerAddNewHabit(
+                `${
+                  new Date().getMonth() + 1
+                }/${new Date().getDate()}/${new Date().getFullYear()}`,
+                2
+              )
+            }
           >
             Workout
           </button>
           <button
             className="choiceButton"
-            onClick={() => triggerAddNewHabit(3)}
+            onClick={() =>
+              triggerAddNewHabit(
+                `${
+                  new Date().getMonth() + 1
+                }/${new Date().getDate()}/${new Date().getFullYear()}`,
+                3
+              )
+            }
           >
             Journal
           </button>
           <button
             className="choiceButton"
-            onClick={() => triggerAddNewHabit(4)}
+            onClick={() =>
+              triggerAddNewHabit(
+                `${
+                  new Date().getMonth() + 1
+                }/${new Date().getDate()}/${new Date().getFullYear()}`,
+                4
+              )
+            }
           >
             Reading
           </button>
