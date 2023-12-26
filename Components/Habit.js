@@ -10,7 +10,7 @@ export default function Habit({
   dropHabit,
   handleChange,
 }) {
-  async function toggleChange(date) {
+  function toggleChange(date) {
     handleChange(id, date);
   }
 

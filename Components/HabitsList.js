@@ -12,7 +12,6 @@ import { updateHabits } from "@/library/updateHabits";
 
 export default function HabitsList({ data, userId }) {
   const [habits, setHabits] = useState(data);
-  console.log("ran");
 
   async function pushHabit(habitId) {
     setHabits((prev) => updateHabits(prev, "add", habitId, null, null)); // Update habits
@@ -34,12 +33,32 @@ export default function HabitsList({ data, userId }) {
   }
 
   async function handleChange(id, date) {
-    setHabits((prev) => updateHabits(prev, "check", null, id, date)); // Update habits
-    await fetch("../api/updateProgress", {
+    for (let i = 0; i < habits.length; i++) {
+      if (habits[i].id == id) {
+        const index = habits[i].completedList.indexOf(date);
+        if (index == -1) {
+          setHabits((prev) => updateHabits(prev, "check", null, id, date, i));
+        } else {
+          setHabits((prev) => updateHabits(prev, "uncheck", null, id, date, i));
+        }
+      }
+    }
+    for (let i = 0; i < habits.length; i++) {
+      if (habits[i].id == id) {
+        await fetch("../api/uncheckProgress", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id, i, habits }),
+        });
+      }
+    }
+
+    // Update habits
+    /*await fetch("../api/updateProgress", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, date }),
-    });
+    });*/
   }
 
   const dataElements = habits?.map((dataEl) => (

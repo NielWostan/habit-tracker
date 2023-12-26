@@ -3,7 +3,8 @@ export function updateHabits(
   operation: string,
   habitId?: number,
   id?: number,
-  date?: string
+  date?: string,
+  i?: number
 ) {
   switch (operation) {
     case "add": {
@@ -20,13 +21,19 @@ export function updateHabits(
     }
     case "check": {
       let returnData = [...data];
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].id == id) {
-          if (!data[i].completedList.includes(date)) {
-            data[i].completedList.push(date);
-          }
-        }
+      const temp = data[i].completedList.indexOf(date);
+      if (temp == -1) {
+        returnData[i].completedList.push(date);
       }
+      return returnData;
+    }
+    case "uncheck": {
+      let returnData = [...data];
+      const temp = data[i].completedList.indexOf(date);
+      if (temp != -1) {
+        returnData[i].completedList.splice(temp, 1);
+      }
+
       return returnData;
     }
   }
