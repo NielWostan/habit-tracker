@@ -19,23 +19,6 @@ export function updateHabits(
       }
       return returnData;
     }
-    case "check": {
-      let returnData = [...data];
-      const temp = data[i].completedList.indexOf(date);
-      if (temp == -1) {
-        returnData[i].completedList.push(date);
-      }
-      return returnData;
-    }
-    case "uncheck": {
-      let returnData = [...data];
-      const temp = data[i].completedList.indexOf(date);
-      if (temp != -1) {
-        returnData[i].completedList.splice(temp, 1);
-      }
-
-      return returnData;
-    }
   }
 }
 // 1. add a habit

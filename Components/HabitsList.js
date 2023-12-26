@@ -34,31 +34,56 @@ export default function HabitsList({ data, userId }) {
 
   async function handleChange(id, date) {
     for (let i = 0; i < habits.length; i++) {
-      if (habits[i].id == id) {
-        const index = habits[i].completedList.indexOf(date);
-        if (index == -1) {
-          setHabits((prev) => updateHabits(prev, "check", null, id, date, i));
+      if (habits[i].id === id) {
+        const exists = habits[i].completedList.includes(date);
+        if (!exists) {
+          setHabits((prev) => {
+            let returnData = [...prev];
+            if (!returnData[i].completedList.includes(date)) {
+              returnData[i].completedList.push(date);
+            }
+            console.log("push", returnData[i].completedList);
+            return returnData;
+          });
+          // Update habits
+          await fetch("../api/updateProgress", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id, date }),
+          });
         } else {
-          setHabits((prev) => updateHabits(prev, "uncheck", null, id, date, i));
+          setHabits((prev) => {
+            let returnData = [...prev];
+            if (returnData[i].completedList.includes(date)) {
+              const list = returnData[i].completedList.filter(
+                (inDate) => inDate !== date
+              );
+              returnData[i].completedList = list;
+            }
+            console.log("pop", returnData[i].completedList);
+            return returnData;
+          });
+          const list = habits[i].completedList;
+          await fetch("../api/uncheckProgress", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id, list }),
+          });
         }
       }
     }
-    for (let i = 0; i < habits.length; i++) {
+
+    /*for (let i = 0; i < habits.length; i++) {
       if (habits[i].id == id) {
+        const list = habits[i].completedList;
+        console.log("hl", list);
         await fetch("../api/uncheckProgress", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id, i, habits }),
+          body: JSON.stringify({ id, list }),
         });
       }
-    }
-
-    // Update habits
-    /*await fetch("../api/updateProgress", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, date }),
-    });*/
+    }*/
   }
 
   const dataElements = habits?.map((dataEl) => (
