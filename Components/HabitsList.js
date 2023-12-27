@@ -5,6 +5,7 @@ import AddHabit from "./AddHabit";
 import { getTitle } from "@/library/getTitle";
 import { useState } from "react";
 import { updateHabits } from "@/library/updateHabits";
+import CustomCalendar from "./CustomCalendar";
 
 // To work on
 // Add feature
@@ -37,21 +38,27 @@ export default function HabitsList({ data, userId }) {
       if (habits[i].id === id) {
         const exists = habits[i].completedList.includes(date);
         if (!exists) {
-          setHabits((prev) => {
-            let returnData = [...prev];
-            if (!returnData[i].completedList.includes(date)) {
-              returnData[i].completedList.push(date);
-            }
-            console.log("push", returnData[i].completedList);
-            return returnData;
-          });
-          // Update habits
           await fetch("../api/updateProgress", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id, date }),
           });
+          setHabits((prev) => {
+            let returnData = [...prev];
+            if (!returnData[i].completedList.includes(date)) {
+              returnData[i].completedList.push(date);
+            }
+            return returnData;
+          });
         } else {
+          const list = habits[i].completedList.filter(
+            (inDate) => inDate !== date
+          );
+          await fetch("../api/uncheckProgress", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id, list }),
+          });
           setHabits((prev) => {
             let returnData = [...prev];
             if (returnData[i].completedList.includes(date)) {
@@ -60,14 +67,7 @@ export default function HabitsList({ data, userId }) {
               );
               returnData[i].completedList = list;
             }
-            console.log("pop", returnData[i].completedList);
             return returnData;
-          });
-          const list = habits[i].completedList;
-          await fetch("../api/uncheckProgress", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id, list }),
           });
         }
       }
@@ -101,6 +101,7 @@ export default function HabitsList({ data, userId }) {
     <div className="habitsList">
       {dataElements}
       <AddHabit pushHabit={pushHabit} />
+      <CustomCalendar data={habits} />
       <style jsx>
         {`
           .habitsList {
