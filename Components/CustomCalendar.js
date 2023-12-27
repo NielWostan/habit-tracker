@@ -6,8 +6,11 @@ import { getStats } from "@/library/getStats";
 import { checkDate } from "@/library/checkDate";
 
 export default function CustomCalendar({ data }) {
-  const counter = getStats(data);
-  console.log(counter);
+  const latestData =
+    localStorage.getItem("habits") !== null
+      ? JSON.parse(localStorage.getItem("habits"))
+      : data;
+  const counter = getStats(latestData);
   return (
     <Calendar
       tileClassName={({ date, view }) =>

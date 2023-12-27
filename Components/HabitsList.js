@@ -8,8 +8,7 @@ import { updateHabits } from "@/library/updateHabits";
 import CustomCalendar from "./CustomCalendar";
 
 // To work on
-// Add feature
-// Uncheck feature
+// Make add feature update in real-time
 
 export default function HabitsList({ data, userId }) {
   const [habits, setHabits] = useState(data);
@@ -85,6 +84,8 @@ export default function HabitsList({ data, userId }) {
       }
     }*/
   }
+
+  localStorage.setItem("habits", JSON.stringify(habits));
 
   const dataElements = habits?.map((dataEl) => (
     <Habit
