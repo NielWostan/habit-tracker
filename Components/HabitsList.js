@@ -11,6 +11,8 @@ import CustomCalendar from "./CustomCalendar";
 // Make add feature update in real-time
 
 export default function HabitsList({ data, userId }) {
+  // change how you get data, make so that the first time, if avaible, data is always taken
+  // from local sotrage just like you did in CustomCalendar.js
   const [habits, setHabits] = useState(data);
 
   async function pushHabit(habitId) {

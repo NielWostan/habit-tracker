@@ -1,6 +1,9 @@
 import React from "react";
 
 export default function CalendarWindow({ activeDate, isPopUpShown, data }) {
+  function registerClick(date, habitId) {
+    console.log(date, habitId);
+  }
   return (
     <div className="addHabitPopUp">
       <h3 className="addAHabitHeading">Progress for {activeDate}</h3>
@@ -9,28 +12,28 @@ export default function CalendarWindow({ activeDate, isPopUpShown, data }) {
           <p>Meditation</p>
           <div
             className="habitSlot meditation"
-            onClick={() => registerClick(`${activeDate}`)}
+            onClick={() => registerClick(`${activeDate}`, 1)}
           ></div>
         </div>
         <div className="habitPacket">
           <p>Workout</p>
           <div
             className="habitSlot workout"
-            onClick={() => registerClick(`${activeDate}`)}
+            onClick={() => registerClick(`${activeDate}`, 2)}
           ></div>
         </div>
         <div className="habitPacket">
           <p>Journal</p>
           <div
             className="habitSlot journal"
-            onClick={() => registerClick(`${activeDate}`)}
+            onClick={() => registerClick(`${activeDate}`, 3)}
           ></div>
         </div>
         <div className="habitPacket">
           <p>Reading</p>
           <div
             className="habitSlot reading"
-            onClick={() => registerClick(`${activeDate}`)}
+            onClick={() => registerClick(`${activeDate}`, 4)}
           ></div>
         </div>
       </div>

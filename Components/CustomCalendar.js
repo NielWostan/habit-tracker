@@ -8,6 +8,9 @@ import CalendarWindow from "./CalendarWindow";
 import { useState } from "react";
 
 export default function CustomCalendar({ data }) {
+  // consider adding state to store the habits while also storing it it local storage
+  // check HabitsList.js
+  // also trigger changes to dataset through his componenet, just like HabitsList.js
   const [activeDate, setActiveDate] = useState();
   const [isPopUpShown, setIsPopUpShown] = useState(false);
   function togglePopUp(date) {
