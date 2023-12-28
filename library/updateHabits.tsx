@@ -1,3 +1,5 @@
+import { getTitle } from "./getTitle";
+
 export function updateHabits(
   data: any[],
   operation: string,
@@ -8,7 +10,18 @@ export function updateHabits(
 ) {
   switch (operation) {
     case "add": {
-      // to build
+      const returnData = [
+        ...data,
+        {
+          id: i,
+          habitId: habitId,
+          count: i,
+          title: getTitle(habitId),
+          completedList: [],
+          projectId: id,
+        },
+      ];
+      return returnData;
     }
     case "delete": {
       let returnData = [];

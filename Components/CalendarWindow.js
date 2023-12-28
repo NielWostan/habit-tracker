@@ -1,8 +1,35 @@
 import React from "react";
 
-export default function CalendarWindow({ activeDate, isPopUpShown, data }) {
-  function registerClick(date, habitId) {
-    console.log(date, habitId);
+export default function CalendarWindow({
+  activeDate,
+  isPopUpShown,
+  data,
+  toggleChange,
+}) {
+  function registerClick(id, date) {
+    toggleChange(id, date);
+  }
+
+  let id1 = -1;
+  let id2 = -1;
+  let id3 = -1;
+  let id4 = -1;
+
+  for (let i = 0; i < data.length; i++) {
+    switch (data[i].habitId) {
+      case 1:
+        id1 = data[i].id;
+        break;
+      case 2:
+        id2 = data[i].id;
+        break;
+      case 3:
+        id3 = data[i].id;
+        break;
+      case 4:
+        id4 = data[i].id;
+        break;
+    }
   }
   return (
     <div className="addHabitPopUp">
@@ -12,28 +39,28 @@ export default function CalendarWindow({ activeDate, isPopUpShown, data }) {
           <p>Meditation</p>
           <div
             className="habitSlot meditation"
-            onClick={() => registerClick(`${activeDate}`, 1)}
+            onClick={() => registerClick(id1, `${activeDate}`)}
           ></div>
         </div>
         <div className="habitPacket">
           <p>Workout</p>
           <div
             className="habitSlot workout"
-            onClick={() => registerClick(`${activeDate}`, 2)}
+            onClick={() => registerClick(id2, `${activeDate}`)}
           ></div>
         </div>
         <div className="habitPacket">
           <p>Journal</p>
           <div
             className="habitSlot journal"
-            onClick={() => registerClick(`${activeDate}`, 3)}
+            onClick={() => registerClick(id3, `${activeDate}`)}
           ></div>
         </div>
         <div className="habitPacket">
           <p>Reading</p>
           <div
             className="habitSlot reading"
-            onClick={() => registerClick(`${activeDate}`, 4)}
+            onClick={() => registerClick(id4, `${activeDate}`)}
           ></div>
         </div>
       </div>

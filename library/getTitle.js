@@ -1,4 +1,4 @@
-export function getTitle(habitId: number) {
+export function getTitle(habitId) {
   switch (habitId) {
     case 4:
       return "Reading";

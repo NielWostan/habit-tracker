@@ -5,14 +5,29 @@ import Styles from "../app/[username]/profile/page.module.css";
 import { getStats } from "@/library/getStats";
 import { checkDate } from "@/library/checkDate";
 import CalendarWindow from "./CalendarWindow";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CustomCalendar({ data }) {
   // consider adding state to store the habits while also storing it it local storage
   // check HabitsList.js
   // also trigger changes to dataset through his componenet, just like HabitsList.js
+
   const [activeDate, setActiveDate] = useState();
   const [isPopUpShown, setIsPopUpShown] = useState(false);
+  const [habits, setHabits] = useState(
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("habits"))
+      : data
+  );
+
+  useEffect(() => {
+    setHabits(JSON.parse(localStorage.getItem("habits")));
+  }, []);
+
+  console.log("cc ran");
+  const counter = getStats(habits);
+  localStorage.setItem("habits", JSON.stringify(habits));
+
   function togglePopUp(date) {
     if (activeDate == date) {
       setIsPopUpShown(false);
@@ -22,11 +37,50 @@ export default function CustomCalendar({ data }) {
       setActiveDate(date);
     }
   }
-  const latestData =
-    localStorage.getItem("habits") !== null
-      ? JSON.parse(localStorage.getItem("habits"))
-      : data;
-  const counter = getStats(latestData);
+
+  async function toggleChange(id, date) {
+    if (id !== -1) {
+      for (let i = 0; i < habits.length; i++) {
+        if (habits[i].id === id) {
+          const exists = habits[i].completedList.includes(date);
+          if (!exists) {
+            await fetch("../api/updateProgress", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ id, date }),
+            });
+            setHabits((prev) => {
+              let returnData = [...prev];
+              if (!returnData[i].completedList.includes(date)) {
+                returnData[i].completedList.push(date);
+              }
+              return returnData;
+            });
+          } else {
+            const list = habits[i].completedList.filter(
+              (inDate) => inDate !== date
+            );
+            await fetch("../api/uncheckProgress", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ id, list }),
+            });
+            setHabits((prev) => {
+              let returnData = [...prev];
+              if (returnData[i].completedList.includes(date)) {
+                const list = returnData[i].completedList.filter(
+                  (inDate) => inDate !== date
+                );
+                returnData[i].completedList = list;
+              }
+              return returnData;
+            });
+          }
+        }
+      }
+    }
+  }
+
   return (
     <>
       <Calendar
@@ -51,7 +105,8 @@ export default function CustomCalendar({ data }) {
         <CalendarWindow
           activeDate={activeDate}
           isPopUpShown={isPopUpShown}
-          data={data}
+          data={habits}
+          toggleChange={toggleChange}
         />
       )}
     </>
