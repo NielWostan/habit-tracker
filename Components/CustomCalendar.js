@@ -24,6 +24,11 @@ export default function CustomCalendar({ data }) {
     setHabits(JSON.parse(localStorage.getItem("habits")));
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("habits", JSON.stringify(habits));
+    console.log("ran");
+  }, [habits]);
+
   console.log("cc ran");
   const counter = getStats(habits);
   localStorage.setItem("habits", JSON.stringify(habits));
@@ -38,7 +43,7 @@ export default function CustomCalendar({ data }) {
     }
   }
 
-  async function toggleChange(id, date) {
+  /*async function toggleChange(id, date) {
     if (id !== -1) {
       for (let i = 0; i < habits.length; i++) {
         if (habits[i].id === id) {
@@ -64,6 +69,89 @@ export default function CustomCalendar({ data }) {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ id, list }),
+            });
+            setHabits((prev) => {
+              let returnData = [...prev];
+              if (returnData[i].completedList.includes(date)) {
+                const list = returnData[i].completedList.filter(
+                  (inDate) => inDate !== date
+                );
+                returnData[i].completedList = list;
+              }
+              return returnData;
+            });
+          }
+        }
+      }
+    }
+  }*/
+
+  async function toggleChange(id, date) {
+    console.log(id);
+    for (let i = 0; i < habits.length; i++) {
+      if (id > 0) {
+        if (habits[i].id === id) {
+          const exists = habits[i].completedList.includes(date);
+          if (!exists) {
+            await fetch("../api/updateProgress", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ id, date }),
+            });
+            setHabits((prev) => {
+              let returnData = [...prev];
+              if (!returnData[i].completedList.includes(date)) {
+                returnData[i].completedList.push(date);
+              }
+              return returnData;
+            });
+          } else {
+            const list = habits[i].completedList.filter(
+              (inDate) => inDate !== date
+            );
+            await fetch("../api/uncheckProgress", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ id, list }),
+            });
+            setHabits((prev) => {
+              let returnData = [...prev];
+              if (returnData[i].completedList.includes(date)) {
+                const list = returnData[i].completedList.filter(
+                  (inDate) => inDate !== date
+                );
+                returnData[i].completedList = list;
+              }
+              return returnData;
+            });
+          }
+        }
+      } else {
+        if (habits[i].count === id) {
+          console.log("ran");
+          const exists = habits[i].completedList.includes(date);
+          const count = habits[i].count;
+          if (!exists) {
+            await fetch("../api/updateProgressTemp", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ count, date }),
+            });
+            setHabits((prev) => {
+              let returnData = [...prev];
+              if (!returnData[i].completedList.includes(date)) {
+                returnData[i].completedList.push(date);
+              }
+              return returnData;
+            });
+          } else {
+            const list = habits[i].completedList.filter(
+              (inDate) => inDate !== date
+            );
+            await fetch("../api/uncheckProgressTemp", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ count, list }),
             });
             setHabits((prev) => {
               let returnData = [...prev];

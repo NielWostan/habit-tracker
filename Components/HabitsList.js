@@ -11,11 +11,14 @@ import CustomCalendar from "./CustomCalendar";
 
 export default function HabitsList({ data, userId }) {
   // To work on
-  // Make add feature update in real-time
   // change how you get data, make so that the first time, if avaible, data is always taken
   // from local sotrage just like you did in CustomCalendar.js
 
-  const [habits, setHabits] = useState(data);
+  const [habits, setHabits] = useState(
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("habits"))
+      : data
+  );
   const [tempHabits, setTempHabits] = useState([]);
   const [tempId, setTempId] = useState(-1);
 
@@ -37,7 +40,10 @@ export default function HabitsList({ data, userId }) {
     setHabits(JSON.parse(localStorage.getItem("habits")));
   }, []);
 
-  localStorage.setItem("habits", JSON.stringify(habits));
+  useEffect(() => {
+    localStorage.setItem("habits", JSON.stringify(habits));
+    console.log("ran");
+  }, [habits]);
 
   async function pushHabit(habitId) {
     const title = getTitle(habitId);
@@ -49,7 +55,7 @@ export default function HabitsList({ data, userId }) {
     setHabits((prev) =>
       updateHabits(prev, "add", habitId, userId, null, tempId)
     );
-    //setTempId((prev) => prev - 1);
+    setTempId((prev) => prev - 1);
   }
 
   async function dropHabit(id) {
