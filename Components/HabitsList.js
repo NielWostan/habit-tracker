@@ -10,31 +10,26 @@ import { updateHabits } from "@/library/updateHabits";
 // This seems to depend upon where typeof window !== "undefined" ? JSON.parse(localStorage.getItem("habits")) : data
 // code is placed
 // You can see this by moving the aformentioned code to and from HabutsList.js and CustomCalendar.js
-// Note - It looks like the bug has been fixed, but I'm still keeping the note here for later reference
 
 export default function HabitsList({ data, userId }) {
-  const [habits, setHabits] = useState(
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("habits"))
-      : data
-  );
+  const [habits, setHabits] = useState(data);
   const [tempId, setTempId] = useState(-1);
 
   useEffect(() => {
     async function reset() {
       for (let i = 0; i < habits.length; i++) {
         const id = habits[i].id;
-        if (id > 0 && habits[i].count < 0) {
+        if (habits[i].count < 0) {
           await fetch("../api/resetCount", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id, userId }),
+            body: JSON.stringify({ id }),
           });
         }
       }
     }
     reset();
-  }, [habits]);
+  }, []);
 
   useEffect(() => {
     setHabits(JSON.parse(localStorage.getItem("habits")));

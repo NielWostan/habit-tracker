@@ -1,11 +1,12 @@
 "use client";
-import "react-calendar/dist/Calendar.css";
+//import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import Styles from "../app/[username]/profile/page.module.css";
 import { getStats } from "@/library/getStats";
 import { checkDate } from "@/library/checkDate";
 import CalendarWindow from "./CalendarWindow";
 import { useState, useEffect } from "react";
+import "../app/[username]/profile/style.scss";
 
 export default function CustomCalendar({ data }) {
   const [activeDate, setActiveDate] = useState();
@@ -120,16 +121,17 @@ export default function CustomCalendar({ data }) {
   return (
     <>
       <Calendar
+        className={["h0", "h1", "h2", "h3", "h4", "hNan"]}
         tileClassName={({ date, view }) =>
           view === "month" && checkDate(counter, date) === 4
-            ? `${Styles.highlight4}`
+            ? `h4`
             : checkDate(counter, date) === 3
-            ? `${Styles.highlight3}`
+            ? `h3`
             : checkDate(counter, date) === 2
-            ? `${Styles.highlight2}`
+            ? `h2`
             : checkDate(counter, date) === 1
-            ? `${Styles.highlight1}`
-            : `${Styles.highlight0}`
+            ? `h1`
+            : `h0`
         }
         onClickDay={(date) =>
           togglePopUp(

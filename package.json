@@ -19,7 +19,8 @@
     "pusher-js": "^8.4.0-rc2",
     "react": "^18",
     "react-calendar": "^4.6.1",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sass": "^1.69.6"
   },
   "devDependencies": {
     "prisma": "^5.5.1"

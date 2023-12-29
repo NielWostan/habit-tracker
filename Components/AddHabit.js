@@ -57,13 +57,12 @@ export default function AddHabit({ pushHabit }) {
           .addHabitPopUp {
             display: ${isPopUpShown ? "flex" : "none"};
             position: absolute;
+            top: 30vh;
+            align-self: center;
             height: max-content;
             width: 500px;
-            justify-self: center;
             border-radius: 14px;
             flex-direction: column;
-            top: 15vh;
-            left: 50%;
             background-color: #324359;
             align-items: center;
           }
