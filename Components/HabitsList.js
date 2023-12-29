@@ -10,6 +10,7 @@ import { updateHabits } from "@/library/updateHabits";
 // This seems to depend upon where typeof window !== "undefined" ? JSON.parse(localStorage.getItem("habits")) : data
 // code is placed
 // You can see this by moving the aformentioned code to and from HabutsList.js and CustomCalendar.js
+// Note - It looks like the bug has been fixed, but I'm still keeping the note here for later reference
 
 export default function HabitsList({ data, userId }) {
   const [habits, setHabits] = useState(
