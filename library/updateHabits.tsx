@@ -25,11 +25,21 @@ export function updateHabits(
     }
     case "delete": {
       let returnData = [];
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].id != id) {
-          returnData.push(data[i]);
+
+      if (id > 0) {
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].id != id) {
+            returnData.push(data[i]);
+          }
+        }
+      } else {
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].count != id) {
+            returnData.push(data[i]);
+          }
         }
       }
+
       return returnData;
     }
   }
