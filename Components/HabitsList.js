@@ -11,6 +11,8 @@ import { updateHabits } from "@/library/updateHabits";
 // code is placed
 // You can see this by moving the aformentioned code to and from HabutsList.js and CustomCalendar.js
 
+// Another issue is that, when deployed, localstorage is automatically being set to null
+
 export default function HabitsList({ data, userId }) {
   const [habits, setHabits] = useState(data);
   const [tempId, setTempId] = useState(-1);

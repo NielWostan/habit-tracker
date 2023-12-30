@@ -18,8 +18,9 @@ export default function Habit({
     dropHabit(id);
   }
 
-  return (
-    <div className="habit">
+  return <p>hello world</p>;
+  {
+    /*<div className="habit">
       <div className="habitName">
         <p>{title}</p>
       </div>
@@ -87,6 +88,6 @@ export default function Habit({
           }
         `}
       </style>
-    </div>
-  );
+        </div>*/
+  }
 }
