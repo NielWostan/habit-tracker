@@ -15,8 +15,8 @@ export default function HabitsList({ data, userId }) {
   const [habits, setHabits] = useState(data);
   const [tempId, setTempId] = useState(-1);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
+  if (typeof window !== "undefined") {
+    useEffect(() => {
       async function reset() {
         for (let i = 0; i < habits.length; i++) {
           const id = habits[i].id;
@@ -30,20 +30,18 @@ export default function HabitsList({ data, userId }) {
         }
       }
       reset();
-    }
-  }, []);
+    }, []);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
+    useEffect(() => {
       localStorage.setItem("habits", JSON.stringify(habits));
-    }
-  }, [habits]);
+    }, [habits]);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
+    useEffect(() => {
       setHabits(JSON.parse(localStorage.getItem("habits")));
-    }
-  }, []);
+    }, []);
+  } else {
+    console.log("Window is not defined");
+  }
 
   async function pushHabit(habitId) {
     const title = getTitle(habitId);
