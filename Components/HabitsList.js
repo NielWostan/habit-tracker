@@ -14,6 +14,9 @@ import { updateHabits } from "@/library/updateHabits";
 export default function HabitsList({ data, userId }) {
   const [habits, setHabits] = useState(data);
   const [tempId, setTempId] = useState(-1);
+  if (typeof window !== undefined) {
+    localStorage.setItem("habits", "text");
+  }
 
   useEffect(() => {
     async function reset() {
