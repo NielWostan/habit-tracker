@@ -16,27 +16,33 @@ export default function HabitsList({ data, userId }) {
   const [tempId, setTempId] = useState(-1);
 
   useEffect(() => {
-    async function reset() {
-      for (let i = 0; i < habits.length; i++) {
-        const id = habits[i].id;
-        if (habits[i].count < 0) {
-          await fetch("../api/resetCount", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id }),
-          });
+    if (typeof window !== "undefined") {
+      async function reset() {
+        for (let i = 0; i < habits.length; i++) {
+          const id = habits[i].id;
+          if (habits[i].count < 0) {
+            await fetch("../api/resetCount", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ id }),
+            });
+          }
         }
       }
+      reset();
     }
-    reset();
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("habits", JSON.stringify(habits));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("habits", JSON.stringify(habits));
+    }
   }, [habits]);
 
   useEffect(() => {
-    setHabits(JSON.parse(localStorage.getItem("habits")));
+    if (typeof window !== "undefined") {
+      setHabits(JSON.parse(localStorage.getItem("habits")));
+    }
   }, []);
 
   async function pushHabit(habitId) {
