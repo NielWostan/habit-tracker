@@ -151,7 +151,7 @@ export default function HabitsList({ data, userId }) {
     }
   }
 
-  const dataElements = habits.map((dataEl) => (
+  const dataElements = habits?.map((dataEl) => (
     <Habit
       key={dataEl.id}
       id={dataEl.id}
