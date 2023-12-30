@@ -12,11 +12,7 @@ import { updateHabits } from "@/library/updateHabits";
 // You can see this by moving the aformentioned code to and from HabutsList.js and CustomCalendar.js
 
 export default function HabitsList({ data, userId }) {
-  const [habits, setHabits] = useState(
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("habits"))
-      : data
-  );
+  const [habits, setHabits] = useState(data);
   const [tempId, setTempId] = useState(-1);
 
   useEffect(() => {
@@ -39,9 +35,9 @@ export default function HabitsList({ data, userId }) {
     localStorage.setItem("habits", JSON.stringify(habits));
   }, [habits]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     setHabits(JSON.parse(localStorage.getItem("habits")));
-  }, []);
+  }, []);*/
 
   async function pushHabit(habitId) {
     const title = getTitle(habitId);
