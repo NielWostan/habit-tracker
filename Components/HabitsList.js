@@ -36,10 +36,10 @@ export default function HabitsList({ data, userId }) {
   useEffect(() => {
     localStorage.setItem("habits", JSON.stringify(habits));
   }, [habits]);
-
+  /*
   useEffect(() => {
     setHabits(JSON.parse(localStorage.getItem("habits")));
-  }, []);
+  }, []);*/
 
   async function pushHabit(habitId) {
     const title = getTitle(habitId);
