@@ -12,36 +12,36 @@ import { updateHabits } from "@/library/updateHabits";
 // You can see this by moving the aformentioned code to and from HabutsList.js and CustomCalendar.js
 
 export default function HabitsList({ data, userId }) {
-  const [habits, setHabits] = useState(data);
+  const [habits, setHabits] = useState(
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("habits"))
+      : data
+  );
   const [tempId, setTempId] = useState(-1);
 
-  if (typeof window !== "undefined") {
-    useEffect(() => {
-      async function reset() {
-        for (let i = 0; i < habits.length; i++) {
-          const id = habits[i].id;
-          if (habits[i].count < 0) {
-            await fetch("../api/resetCount", {
-              method: "PUT",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ id }),
-            });
-          }
+  useEffect(() => {
+    async function reset() {
+      for (let i = 0; i < habits.length; i++) {
+        const id = habits[i].id;
+        if (habits[i].count < 0) {
+          await fetch("../api/resetCount", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id }),
+          });
         }
       }
-      reset();
-    }, []);
+    }
+    reset();
+  }, []);
 
-    useEffect(() => {
-      localStorage.setItem("habits", JSON.stringify(habits));
-    }, [habits]);
+  useEffect(() => {
+    localStorage.setItem("habits", JSON.stringify(habits));
+  }, [habits]);
 
-    useEffect(() => {
-      setHabits(JSON.parse(localStorage.getItem("habits")));
-    }, []);
-  } else {
-    console.log("Window is not defined");
-  }
+  useEffect(() => {
+    setHabits(JSON.parse(localStorage.getItem("habits")));
+  }, []);
 
   async function pushHabit(habitId) {
     const title = getTitle(habitId);
@@ -155,7 +155,7 @@ export default function HabitsList({ data, userId }) {
     }
   }
 
-  const dataElements = habits?.map((dataEl) => (
+  const dataElements = habits.map((dataEl) => (
     <Habit
       key={dataEl.id}
       id={dataEl.id}

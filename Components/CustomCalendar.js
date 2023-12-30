@@ -11,11 +11,7 @@ import "../app/[username]/profile/style.scss";
 export default function CustomCalendar({ data }) {
   const [activeDate, setActiveDate] = useState();
   const [isPopUpShown, setIsPopUpShown] = useState(false);
-  const [habits, setHabits] = useState(
-    typeof window !== "undefined"
-      ? JSON.parse(localStorage.getItem("habits"))
-      : data
-  );
+  const [habits, setHabits] = useState(data);
 
   useEffect(() => {
     setHabits(JSON.parse(localStorage.getItem("habits")));
