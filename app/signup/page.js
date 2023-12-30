@@ -1,4 +1,4 @@
-import SignupForm from "./Components/SignupForm";
+import SignupForm from "./Components/test";
 import Styles from "./page.module.css";
 
 export default function Signup() {

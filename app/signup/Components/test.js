@@ -15,7 +15,19 @@ export default function SignupForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password }),
     });
-    console.log(response);
+    login();
+  }
+
+  async function login() {
+    const loginData = await signIn("credentials", {
+      email: email,
+      password: password,
+      redirect: false,
+    });
+    console.log(loginData);
+    if (!loginData.error) {
+      router.replace(`/${email}`);
+    }
   }
 
   return (
