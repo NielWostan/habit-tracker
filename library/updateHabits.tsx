@@ -25,7 +25,6 @@ export function updateHabits(
     }
     case "delete": {
       let returnData = [];
-
       if (id > 0) {
         for (let i = 0; i < data.length; i++) {
           if (data[i].id != id) {
@@ -39,7 +38,6 @@ export function updateHabits(
           }
         }
       }
-
       return returnData;
     }
   }
