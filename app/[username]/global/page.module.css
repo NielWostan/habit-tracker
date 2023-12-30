@@ -11,21 +11,13 @@
     margin-bottom: 25px;
 }
 
-.mainContent {
-    width: 100%;
-    padding: 0px 25px;
-    height: fit-content;
-    display: flex;
-}
-
-.leftContent, .rightContent {
-    width: 50%;
+.leaderboards {
+    margin: 50px 0px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-.rightContentHeading {
-    color: white;
-    font-size: 30px;
+.topLeaderboards, .bottomLeaderboards {
+    display: flex;
+    margin-bottom: 25px;
 }

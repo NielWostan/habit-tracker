@@ -1,12 +1,13 @@
+import { getTitle } from "@/library/getTitle";
 import React from "react";
 import { countCompletions } from "@/library/countCompletions";
 
-export default function AllHabitsLeaderboard({ userData, habitsData }) {
+export default function Leaderboard({ habitId, userData, habitsData }) {
   const data = [];
   for (let i = 0; i < userData.length; i++) {
     const obj = {
       name: userData[i].name,
-      count: countCompletions(habitsData[i], 0),
+      count: countCompletions(habitsData[i], habitId),
     };
     data.push(obj);
   }
@@ -51,7 +52,9 @@ export default function AllHabitsLeaderboard({ userData, habitsData }) {
         padding: "0px 25px",
       }}
     >
-      <h2 style={{ marginBottom: "17.5px" }}>All Habits Leaderboard</h2>
+      <h2 style={{ marginBottom: "17.5px" }}>
+        {getTitle(habitId)} Leaderboard
+      </h2>
       <div
         style={{
           border: "1px solid white",
