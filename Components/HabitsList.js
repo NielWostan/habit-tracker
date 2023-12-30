@@ -82,7 +82,7 @@ export default function HabitsList({ data, userId }) {
               body: JSON.stringify({ id, date }),
             });
             setHabits((prev) => {
-              let returnData = [...prev];
+              let returnData = JSON.parse(JSON.stringify(prev));
               if (!returnData[i].completedList.includes(date)) {
                 returnData[i].completedList.push(date);
               }
@@ -98,7 +98,7 @@ export default function HabitsList({ data, userId }) {
               body: JSON.stringify({ id, list }),
             });
             setHabits((prev) => {
-              let returnData = [...prev];
+              let returnData = JSON.parse(JSON.stringify(prev));
               if (returnData[i].completedList.includes(date)) {
                 const list = returnData[i].completedList.filter(
                   (inDate) => inDate !== date
@@ -120,7 +120,7 @@ export default function HabitsList({ data, userId }) {
               body: JSON.stringify({ count, date }),
             });
             setHabits((prev) => {
-              let returnData = [...prev];
+              let returnData = JSON.parse(JSON.stringify(prev));
               if (!returnData[i].completedList.includes(date)) {
                 returnData[i].completedList.push(date);
               }
@@ -136,7 +136,7 @@ export default function HabitsList({ data, userId }) {
               body: JSON.stringify({ count, list }),
             });
             setHabits((prev) => {
-              let returnData = [...prev];
+              let returnData = JSON.parse(JSON.stringify(prev));
               if (returnData[i].completedList.includes(date)) {
                 const list = returnData[i].completedList.filter(
                   (inDate) => inDate !== date
