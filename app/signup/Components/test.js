@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import Styles from "../page.module.css";
 
@@ -8,6 +10,8 @@ export default function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+
+  const router = useRouter();
 
   async function handleSubmit() {
     const response = await fetch("http://localhost:3000/api/registerUser", {
