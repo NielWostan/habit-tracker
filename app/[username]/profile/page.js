@@ -19,7 +19,7 @@ export default async function Profile() {
 
   const data = await prisma.habits.findMany({
     where: {
-      projectId: userData.id,
+      projectId: userData?.id,
     },
     orderBy: {
       id: "asc",
