@@ -162,6 +162,8 @@ export default function HabitsList({ data, userId }) {
     />
   ));
 
+  console.log(habits);
+
   return (
     <div className="habitsList">
       {dataElements}
