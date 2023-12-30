@@ -32,7 +32,7 @@ export default function HabitsList({ data, userId }) {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("habits", JSON.stringify(habits));
+    localStorage.setItem("habits", "text");
   }, [habits]);
 
   /*useEffect(() => {
