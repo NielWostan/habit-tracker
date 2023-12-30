@@ -37,9 +37,9 @@ export default function HabitsList({ data, userId }) {
     localStorage.setItem("habits", JSON.stringify(habits));
   }, [habits]);
 
-  /*useEffect(() => {
+  useEffect(() => {
     setHabits(JSON.parse(localStorage.getItem("habits")));
-  }, []);*/
+  }, []);
 
   async function pushHabit(habitId) {
     const title = getTitle(habitId);
