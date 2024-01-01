@@ -14,11 +14,14 @@ export default function SignupForm() {
   const router = useRouter();
 
   async function handleSubmit() {
-    const response = await fetch("http://localhost:3000/api/registerUser", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email, password }),
-    });
+    const response = await fetch(
+      "https://habit-tracker-lime.vercel.app/api/registerUser",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password }),
+      }
+    );
     login();
   }
 
