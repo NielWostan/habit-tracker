@@ -1,26 +1,71 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pageHeading {
-    margin-top: 30px;
-    color: white;
-    font-size: 35px;
-    height: min-content;
+  margin-top: 30px;
+  color: white;
+  font-size: 35px;
+  height: min-content;
 }
 
 .logOutHeading {
-    margin-top: 125px;
-    color: white;
-    font-size: 45px;
+  margin-top: 125px;
+  color: white;
+  font-size: 45px;
 }
 
 .logOutLink {
-    text-decoration: underline;
-    color: white;
-    text-underline-offset: 4px;
-    font-size: 25px;
-    margin-top: 25px;
+  text-decoration: underline;
+  color: white;
+  text-underline-offset: 4px;
+  font-size: 25px;
+  margin-top: 25px;
+}
+
+.habit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  width: 98vw;
+  margin: 25px 10px 0px 10px;
+  font-weight: bold;
+}
+
+.habitName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 25%;
+  color: white;
+  align-self: center;
+  margin-left: 25px;
+  font-size: 20px;
+}
+
+.dayList {
+  display: flex;
+  width: 75%;
+  justify-content: space-around;
+  color: white;
+}
+
+.nextButton {
+  height: 30px;
+  width: 30px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  padding-bottom: 1px;
+  color: #ffffff;
+  align-self: center;
+  margin-right: 15px;
+  font-weight: bold;
 }

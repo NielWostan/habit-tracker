@@ -175,7 +175,7 @@ export default function HabitsList({ data, userId }) {
             flex-direction: column;
             justify-content: space-evenly;
             width: 98vw;
-            margin: 25px;
+            margin: 0px 25px;
             height: ${(habits?.length + 1) * 50}px;
           }
         `}

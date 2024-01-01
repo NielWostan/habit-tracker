@@ -4,6 +4,7 @@ import { authOptions } from "@/library/auth";
 import HabitsList from "../../Components/HabitsList";
 import prisma from "@/library/prisma";
 import Link from "next/link";
+import { getDay } from "@/library/getDay";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -31,6 +32,15 @@ export default async function Home() {
       {session?.user?.name ? (
         <>
           <h2 className={Styles.pageHeading}>Home page for {userData?.name}</h2>
+          <div className={Styles.habit}>
+            <p className={Styles.habitName}>Title</p>
+            <div className={Styles.dayList}>
+              <p>{getDay(0)}</p>
+              <p>{getDay(-1)}</p>
+              <p>{getDay(-2)}</p>
+            </div>
+            <p className={Styles.nextButton}>{`>`}</p>
+          </div>
           <HabitsList data={data} userId={userData?.id} />
         </>
       ) : (
